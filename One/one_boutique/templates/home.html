@@ -30,18 +30,21 @@
     </header>
     <main>
         {% block content %}
-        <section id="Women">
-            <div class="Women-content"></div>
+        <section id="Woman">
+            <div class="Woman-content"></div>
     </section>
     <section class="products">
+        
         <div class="product-grid">
-            {% for product in products %}
+            {% for product in new_products_women %}
              <div class="product">
                     <img src="{{ product.image.url }}">
                     <h3>{{ product.name }}</h3>
                     <p>{{ product.price }}€</p>
                     <button>Voir +</button>
                 </div>  
+                {% empty %}
+                <p>Aucun produit disponible.</p>
             {% endfor %}
         </div>
     </section>
@@ -51,7 +54,7 @@
 </section>
 <section class="products">
     <div class="product-grid">
-        {% for product in products %}
+        {% for product in new_products_men %}
          <div class="product">
                 <img src="{{ product.image.url }}">
                 <h3>{{ product.name }}</h3>
