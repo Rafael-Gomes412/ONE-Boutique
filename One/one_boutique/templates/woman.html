@@ -1,0 +1,18 @@
+{% extends 'home.html' %}  
+
+{% block title %}ONE | Femme{% endblock %}  
+
+{% block content %}  
+<section class="products">
+    <div class="product-grid">
+        {% for product in products %}
+         <div class="product">
+                <img src="{{ product.image.url }}">
+                <h3>{{ product.name }}</h3>
+                <p>{{ product.price }}€</p>
+                <button>Voir +</button>
+            </div>  
+        {% endfor %}
+    </div>
+</section>
+{% endblock %} 

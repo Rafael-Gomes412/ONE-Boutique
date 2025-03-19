@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ONE | Boutique{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="icon" type="image/png" href="https://www.example.com/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://unpkg.com/ionicons@5.5.2/dist/css/ionicons.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="{% url 'home' %}"><h1 class="titulo">ONE</h1></a>
+        </div>
+        <nav>
+            <ul class="navbar">
+                <li><a href="{% url 'Homme' %}">Homme</a></li>
+                <li><a href="{% url 'Femme' %}">Femme</a></li>
+                <li><a href="{% url 'home' %}">Nouveautés</a></li>
+            </ul>
+            <ul class="icons">
+                <li><a href="{% url 'Femme' %}"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                <li><a href="{% url 'Homme' %}"><i class="fa-regular fa-user"></i></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}
+        <section id="Women">
+            <div class="Women-content"></div>
+    </section>
+    <section class="products">
+        <div class="product-grid">
+            {% for product in products %}
+             <div class="product">
+                    <img src="{{ product.image.url }}">
+                    <h3>{{ product.name }}</h3>
+                    <p>{{ product.price }}€</p>
+                    <button>Voir +</button>
+                </div>  
+            {% endfor %}
+        </div>
+    </section>
+        
+<section id="Men">
+        <div class="Men-content"></div>
+</section>
+<section class="products">
+    <div class="product-grid">
+        {% for product in products %}
+         <div class="product">
+                <img src="{{ product.image.url }}">
+                <h3>{{ product.name }}</h3>
+                <p>{{ product.price }}€</p>
+                <button>Voir +</button>
+            </div>  
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2025 ONE | Tous droits réservés</p>
+    </footer>
+</body>
+</html>
