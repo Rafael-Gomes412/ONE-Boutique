@@ -6,11 +6,11 @@
 <section class="products">
     <div class="product-grid">
         {% for product in products_men %}
-         <div class="product">
+         <div class="product_men">
                 <img src="{{ product.image.url }}">
                 <h3>{{ product.name }}</h3>
                 <p>{{ product.price }}€</p>
-                <button>Voir +</button>
+                <button>acheter</button>
             </div>  
         {% endfor %}
     </div>

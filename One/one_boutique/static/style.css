@@ -51,53 +51,47 @@ header {
 /*======================================================
 # Configuration navbar 
 ======================================================*/
+
+/* Liste des menus */
 .navbar {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    display: flex;
+    list-style: none;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+}
+
+/* Style des liens */
+.navbar li a {
+    text-decoration: none;
+    font-size: 1.6rem;
+    color: #333;
+    padding: 10px 15px;
+    border-radius: 4px;
+}
+/* Liste des icônes */
+.icon {
+    display: flex;
+    list-style: none;
+    gap: 1px;
+    padding: 0;
+    margin: 0;
+}
+
+.icon li a{
+    text-decoration: none;
+    font-size: 20px;
+    color: #000000;
+    padding: 5px 10px;
+}
+
+/* Ajuste l'affichage des icônes */
+.icon li {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 10px;
-    list-style: none;
-    padding: 0;
-    margin: 0;
 }
 
-.navbar li a {
-    font-size: 1.6rem;
-    text-decoration: none;
-    color: #333;
-    padding: 10px 20px; 
-    border-radius: 4px;  
-}
 
-/*======================================================
-# Icons navbar 
-======================================================*/
-ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.icons {
-    display: flex; 
-    font-size: 15px;
-    color: #000;
-    gap: 18px; 
-}
-
-.icons li {
-    display: flex;
-    text-decoration: none;
-    align-items: center; 
-}
-
-.icons a {
-    text-decoration: none; 
-    color:black; 
-}
 /*======================================================
 # Section Men / Women (Homme / Femme)
 ======================================================*/
@@ -138,16 +132,16 @@ ul {
 
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(6, minmax(280px, 1fr)); /* 6 colonnes avec largeur flexible */
+    grid-template-columns: repeat(6, minmax(280px, 1fr)); 
     gap: 10px;
     justify-items: center;
-    max-width: 1700px; /* Ajuste la largeur max */
+    max-width: 1700px; 
     margin: auto;
     padding: 20px;
 }
 
 /* Cartão do Produto */
-.product {
+.product, .product_men, .product_women {
     background: #fff;
     border-radius: 12px;
     padding: 20px;
@@ -156,16 +150,16 @@ ul {
     cursor: pointer;
     width: 100%;
     margin: auto;
-    max-width: 100%; /* Augmente la taille max des produits */
+    max-width: 100%; 
 }
 
-.product:hover {
+.product:hover, .product_men:hover, .product_women:hover {
     transform: scale(1.05);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 /* Imagem do Produto */
-.product img {
+.product img,.product_men img, .product_women img {
     width: 100%;
     max-height: 100%;
     height: auto;
@@ -174,12 +168,12 @@ ul {
     transition: transform 0.3s ease-in-out;
 }
 
-.product:hover img {
+.product img, .product_men img, .product_women:hover img {
     transform: scale(1.1);
 }
 
 /* Nome do Produto */
-.product h3 {
+.product h3, .product_men h3, .product_women h3 {
     font-size: 1.8rem;
     color: #333;
     margin: 15px 0;
@@ -187,14 +181,14 @@ ul {
 }
 
 /* Preço */
-.product p {
+.product p, .product_men p, .product_women p {
     font-size: 1.6rem;
     color: #555;
     font-weight: 600;
 }
 
 /* Botão */
-.product button {
+.product button, .product_men button, .product_women button {
     background: #000;
     color: #fff;
     border: none;
@@ -208,7 +202,79 @@ ul {
     font-weight: bold;
 }
 
-.product button:hover {
-    background: #132ec4; /* Cor destaque estilo Gymshark */
+.product button:hover,.product_men button:hover,.product_women button:hover {
+    background: #132ec4; 
 }
 
+
+/*======================================================
+# Login et sinup
+======================================================*/
+.ls-button {
+    padding: 15px 25px; 
+    background-color: black;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: background-color 0.3s, color 0.3s;
+    margin-top: 10px; 
+}
+
+.ls-button:hover {
+    background-color: white;
+    color: black;
+}
+
+/* Formulaires de connexion et d'inscription */
+.login-main, .signup-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container, .signup-container {
+    background-color: #fff;
+    padding: 40px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-form, .signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.login-form h2, .signup-form h2 {
+    text-align: center;
+    font-size: 2.4rem; 
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: #333;
+    font-size: 1.2rem;
+
+}
+
+.form-group input {
+    padding: 12px;
+}
+.login-link p {
+font-size: 12px;
+margin: 15px;
+} 
+
+.error{
+    color: red;
+}

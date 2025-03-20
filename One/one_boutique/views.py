@@ -1,5 +1,11 @@
-from django.shortcuts import render
-from. models import Product
+from django.shortcuts import render,redirect
+from .models import Product
+from django.contrib.auth import authenticate,login,logout
+from django.contrib import messages
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+from django import forms
+from .forms import SingupForm
 #vue page home 
 def home(request):
     new_products_men = Product.objects.filter(category__name="new_men")
@@ -21,5 +27,31 @@ def women(request):
         'products_women': products_women,
         })
 #vue page login 
-def login(request):
-    return render(request, 'login.html', {})
+def login_user(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+    else:
+        return render(request, 'login.html', {})
+
+#vue page logout 
+def logout_user(request):
+    logout(request)
+    return redirect('home')
+
+#vue page register
+def register_user(request):
+    if request.method == 'POST':
+        form = SingupForm(request.POST)
+        if form.is_valid():
+            user = form.save()  
+            login(request, user)  
+            return redirect('home')  
+    else:
+        form =SingupForm()
+    return render(request, 'register.html', {'form': form})

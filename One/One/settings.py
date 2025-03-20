@@ -69,11 +69,11 @@ WSGI_APPLICATION = 'One.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'one',  # Mettre le nom de la base de données entre guillemets
-        'USER': 'rafael',  # Nom d'utilisateur PostgreSQL
-        'PASSWORD': '1234',  # Mot de passe de l'utilisateur
-        'HOST': 'localhost',  # Hôte local pour PostgreSQL
-        'PORT': '5432',  # Port PostgreSQL par défaut
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
     }
 }
 
