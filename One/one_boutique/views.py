@@ -4,8 +4,9 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from django import forms
+from  django import forms
 from .forms import SingupForm
+
 #vue page home 
 def home(request):
     new_products_men = Product.objects.filter(category__name="new_men")
@@ -55,3 +56,9 @@ def register_user(request):
     else:
         form =SingupForm()
     return render(request, 'register.html', {'form': form})
+
+#Details produits 
+
+def product_detail(request, pk):
+    product = Product.objects.get(id=pk)
+    return render(request, 'product_detail.html', {'product': product})

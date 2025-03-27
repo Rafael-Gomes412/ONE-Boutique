@@ -15,18 +15,30 @@
 <body>
     <header>
         <div class="logo">
-            <a href="{% url 'home' %}"><h1 class="titulo">ONE</h1></a>
+            <a href="{% url 'home' %}">
+                <img src="{% static 'logo.png' %}" alt="Logo">
+            </a>
         </div>
             <nav>
                 <ul class="navbar">
-                    <li><a href="{% url 'Homme' %}">Homme</a></li>
-                    <li><a href="{% url 'Femme' %}">Femme</a></li>
+                    <li class="dropdown">
+                        <a href="#">Homme</a>
+                        <ul class="dropdown-content">
+                            <li><a href="{% url 'Homme' %}?category=chaussures">Chaussures</a></li>
+                        </ul>
+                        <li class="dropdown">
+                            <a href="#">Femme</a>
+                            <ul class="dropdown-content">
+                                <li><a href="{% url 'Femme' %}?category=robes">Robes</a></li>
+                                <li><a href="{% url 'Femme' %}?category=robes">Robes</a></li><li>
+                            </ul>
+
                     <li><a href="{% url 'home' %}">Nouveautés</a></li>
                 </ul>
             </nav>
 
             <ul class="icon">
-                <li><a href="{% url 'Femme' %}"><i class="bi bi-cart"></i>
+                <li><a href="{% url 'cart_summary' %}"><i class="bi bi-cart"></i>
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'Logout' %}"><i class="bi bi-box-arrow-right"></i></a></li>
                 {% else %}
@@ -36,44 +48,51 @@
     </header>
     <main>
         {% block content %}
-        <section id="Woman">
-            <div class="Woman-content"></div>
+        <section id="Women">
+            <div class="Women-content"></div>
+            <h1>JUSQU'À 40% DE RÉDUCTION</h1>
     </section>
     <section class="products">
-        
         <div class="product-grid">
             {% for product in new_products_women %}
              <div class="product">
+                <a href="{% url 'Produit' product.id %}">
                     <img src="{{ product.image.url }}">
-                    <h3>{{ product.name }}</h3>
+                </a>
+                    <h4>{{ product.name }}</h4>
+                    <p>{{product.description}}</p>
                     <p>{{ product.price }}€</p>
-                    <a href="{% url 'Femme' %}">
-                        <button>Voir +</button>
-                    </a>
                 </div>  
                 {% empty %}
                 <p>Aucun produit disponible.</p>
             {% endfor %}
         </div>
     </section>
-        
-<section id="Men">
+
+<!-- collection Homme-->
+    <section id="Men">
         <div class="Men-content"></div>
+        <h1>JUSQU'À 40% DE RÉDUCTION</h1>
+        
 </section>
 <section class="products">
     <div class="product-grid">
         {% for product in new_products_men %}
          <div class="product">
-                <img src="{{ product.image.url }}">
-                <h3>{{ product.name }}</h3>
-                <p>{{ product.price }}€</p>
-                <a href="{% url 'Homme' %}">
-                    <button>Voir +</button>
+                <a href="{% url 'Produit' product.id %}">
+                    <img src="{{ product.image.url }}">
                 </a>
+                <h4>{{ product.name }}</h4>
+                <p>{{product.description}}</p>
+                <p>{{ product.price }}€</p>
             </div>  
+            {% empty %}
+            <p>Aucun produit disponible.</p>
         {% endfor %}
     </div>
 </section>
+
+    
 {% endblock %}
     </main>
 

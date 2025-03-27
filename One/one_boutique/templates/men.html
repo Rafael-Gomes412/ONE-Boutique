@@ -3,14 +3,13 @@
 {% block title %}ONE | Homme{% endblock %}  
 
 {% block content %}  
-<section class="products">
-    <div class="product-grid">
+<section class="products_N">
+    <div class="product-grid_N">
         {% for product in products_men %}
          <div class="product_men">
                 <img src="{{ product.image.url }}">
-                <h3>{{ product.name }}</h3>
+                <h4>{{ product.name }}</h4>
                 <p>{{ product.price }}€</p>
-                <button>acheter</button>
             </div>  
         {% endfor %}
     </div>

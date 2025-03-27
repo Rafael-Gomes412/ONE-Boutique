@@ -1,0 +1,28 @@
+{% extends 'home.html' %} 
+
+    {% block content %}
+<div class ="container">
+    <div class="card mb-3" >
+        <div class="row g-0">
+        <div class="col-md-4">
+            <img src="{{ product.image.url }}" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+            <h5 class="card-title">{{ product.name }}</h5>
+            <br>
+            <p class="card-price">{{ product.price }}€</p>
+
+            <p class="card-size">{{ product.description }}</p>
+                
+            </div>
+            <a href="{% url 'cart_summary'  %}">
+            <button class="panier-btn">Ajouter au panier</button>
+        </a>
+        </div>
+        </div>
+    </div>
+    </div>
+
+</div>
+{% endblock %}

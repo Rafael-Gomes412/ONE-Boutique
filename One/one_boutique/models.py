@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinLengthValidator
 import datetime
 
 # type de produits
@@ -14,7 +15,7 @@ class Customer(models.Model):
     last_name = models.CharField(max_length=50)
     email = models.EmailField(max_length=100)
     phone= models.CharField(max_length=10)
-    password = models.CharField(max_length=50)
+    password = models.CharField( max_length=50,validators=[MinLengthValidator(12)], null=True, blank=True, help_text="Le mot de passe doit contenir au moins 12 caractères.")
 
 
 def __str__(self):
@@ -26,7 +27,7 @@ class Product(models.Model):
     name = models.CharField(max_length=50)
     price = models.DecimalField(default=0, max_digits=7, decimal_places=2)
     category = models.ForeignKey(Category, on_delete=models.CASCADE,default=1)
-    description =models.CharField(max_length=250, default='',blank=True,null=True)
+    description =models.CharField(max_length=250, default='',blank=True,null=True) 
     image = models.ImageField(upload_to='upload/product/')
 
     def __str__(self):

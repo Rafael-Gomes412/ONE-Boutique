@@ -7,16 +7,15 @@
     <div class="login-container">
         <form method="POST" action="{% url 'Login' %}" class="login-form">   
             {% csrf_token %} 
-            <h2>Connexion</h2>
-
+            <img class="log" src="/static/logo.png" alt="Logo">
+             <h2>Connexion</h2>
             <div class="form-group">
-                <label for="username">Nom d'utilisateur :</label>
-                <input type="text" id="username" name="username" required placeholder="Entrez votre nom d'utilisateur" aria-label="Nom d'utilisateur" autocomplete="username">
+                <input type="text" id="username" name="username" required placeholder="Adresse mail*" autocomplete="username">
             </div>
 
             <div class="form-group">
-                <label for="password">Mot de passe :</label>
-                <input type="password" id="password" name="password" required placeholder="Entrez votre mot de passe" aria-label="Mot de passe" autocomplete="current-password">
+                
+                <input type="password" id="password" name="password" required placeholder=" Mot de passe*"  autocomplete="current-password">
             </div>
 
             <button type="submit" class="ls-button">Se connecter</button>

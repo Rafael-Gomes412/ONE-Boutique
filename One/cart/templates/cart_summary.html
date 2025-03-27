@@ -1,0 +1,34 @@
+{% extends 'home.html' %}  
+
+{% block title %}ONE | Panier{% endblock %} 
+
+{% block content %}  
+<div class="cart-container">
+    <div class="cart-header">
+        <h1>Votre Panier</h1>
+        <span>3 articles</span>
+    </div>
+
+    <div class="cart-item">
+        <img src="{{ product.image.url }}" alt="Produit 1">
+        <div class="item-details">
+            <h2>{{product.name}}</h2>
+            <p>Noir / M</p>
+            <div class="item-quantity">
+                <button class="quantity-btn">-</button>
+                <span>1</span>
+                <button class="quantity-btn">+</button>
+            </div>
+        </div>
+        <div class="item-price">{{product.price}}</div>
+    </div>
+    <div class="cart-summary">
+        <div>
+            <p>Total HT: 104,98 €</p>
+            <p>TVA: 20,99 €</p>
+            <strong>Total TTC: 125,97 €</strong>
+        </div>
+        <button class="checkout-btn">Procéder au paiement</button>
+    </div>
+</div>
+{% endblock %}
