@@ -6,7 +6,9 @@
     <title>{% block title %}ONE | Boutique{% endblock %}</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'style.css' %}">
-    <link rel="icon" type="image/png" href="https://www.example.com/favicon.png">
+    <link rel="icon" href="{% static 'logo.ico' %}">
+    
+    <!-- Icônes -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -14,90 +16,137 @@
 </head>
 <body>
     <header>
+        <div class="mobile-menu">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+
         <div class="logo">
             <a href="{% url 'home' %}">
                 <img src="{% static 'logo.png' %}" alt="Logo">
             </a>
         </div>
-            <nav>
-                <ul class="navbar">
-                    <li class="dropdown">
-                        <a href="#">Homme</a>
-                        <ul class="dropdown-content">
-                            <li><a href="{% url 'Homme' %}?category=chaussures">Chaussures</a></li>
-                        </ul>
-                        <li class="dropdown">
-                            <a href="#">Femme</a>
-                            <ul class="dropdown-content">
-                                <li><a href="{% url 'Femme' %}?category=robes">Robes</a></li>
-                                <li><a href="{% url 'Femme' %}?category=robes">Robes</a></li><li>
-                            </ul>
 
-                    <li><a href="{% url 'home' %}">Nouveautés</a></li>
-                </ul>
-            </nav>
-
-            <ul class="icon">
-                <li><a href="{% url 'cart_summary' %}"><i class="bi bi-cart"></i>
-                {% if user.is_authenticated %}
-                <li><a href="{% url 'Logout' %}"><i class="bi bi-box-arrow-right"></i></a></li>
-                {% else %}
-                <li><a href="{% url 'Login' %}"><i class="bi bi-person"></i></a></li>
-                {% endif %}
+        <nav>
+            <ul class="navbar">
+                <li class="dropdown">
+                    <a href="#">Homme</a>
+                    <ul class="dropdown-content">
+                        <li><a href="{% url 'Homme' %}?category=chaussures">Chaussures</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#">Femme</a>
+                    <ul class="dropdown-content">
+                        <li><a href="{% url 'Femme' %}?category=robes">Robes</a></li>
+                    </ul>
+                </li>
+                <li><a href="{% url 'Accessoires' %}">Accessoires</a></li>
             </ul>
+        </nav>
+
+        <ul class="icon">
+            <li>
+                <a href="{% url 'cart_summary' %}" class="cart-icon">
+                    <i class="bi bi-cart"></i>
+                    <span class="cart-count">{{ cart_count }}</span>
+                </a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="dropdown">
+                <a href="#"><i class="bi bi-person-circle"></i> </a>
+                <span>{{ user.username }}</span>
+                <ul class="dropdown-content">
+                    <li><a href="{% url 'Compte' %}">🔒 Mon Compte</a></li>
+                    <li><a href="{% url 'cart_summary' %}">🛒 Mes Commandes</a></li>
+                    <li><a href="{% url 'Logout' %}"> 🔓 Se déconnecter</a></li>
+                </ul>
+            </li>            
+            
+            {% else %}
+                <li><a href="{% url 'Login' %}"><i class="bi bi-person"></i></a></li>
+            {% endif %}
+        </ul>
+        
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" 
+                integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" 
+                crossorigin="anonymous"></script>
     </header>
+
+    <script src="{% static 'js/mobile-navbar.js' %}"></script>
+
     <main>
         {% block content %}
+        <!-- Section Femme -->
         <section id="Women">
             <div class="Women-content"></div>
             <h1>JUSQU'À 40% DE RÉDUCTION</h1>
-    </section>
-    <section class="products">
-        <div class="product-grid">
-            {% for product in new_products_women %}
-             <div class="product">
-                <a href="{% url 'Produit' product.id %}">
-                    <img src="{{ product.image.url }}">
-                </a>
-                    <h4>{{ product.name }}</h4>
-                    <p>{{product.description}}</p>
-                    <p>{{ product.price }}€</p>
-                </div>  
+        </section>
+
+        <section class="products">
+            <div class="product-grid">
+                {% for product in new_products_women %}
+                    <div class="product">
+                        <a href="{% url 'Produit' product.id %}">
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                        </a>
+                        <h4>{{ product.name }}</h4>
+                        <p>{{ product.description }}</p>
+                        <p>{{ product.price }} €</p>
+                    </div>
                 {% empty %}
-                <p>Aucun produit disponible.</p>
-            {% endfor %}
-        </div>
-    </section>
+                    <p>Aucun produit disponible.</p>
+                {% endfor %}
+            </div>
+        </section>
 
-<!-- collection Homme-->
-    <section id="Men">
-        <div class="Men-content"></div>
-        <h1>JUSQU'À 40% DE RÉDUCTION</h1>
-        
-</section>
-<section class="products">
-    <div class="product-grid">
-        {% for product in new_products_men %}
-         <div class="product">
-                <a href="{% url 'Produit' product.id %}">
-                    <img src="{{ product.image.url }}">
-                </a>
-                <h4>{{ product.name }}</h4>
-                <p>{{product.description}}</p>
-                <p>{{ product.price }}€</p>
-            </div>  
-            {% empty %}
-            <p>Aucun produit disponible.</p>
-        {% endfor %}
-    </div>
-</section>
+        <!-- Section Homme -->
+        <section id="Men">
+            <div class="Men-content"></div>
+            <h1>JUSQU'À 40% DE RÉDUCTION</h1>
+        </section>
 
-    
-{% endblock %}
+        <section class="products">
+            <div class="product-grid">
+                {% for product in new_products_men %}
+                    <div class="product">
+                        <a href="{% url 'Produit' product.id %}">
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                        </a>
+                        <h4>{{ product.name }}</h4>
+                        <p>{{ product.description }}</p>
+                        <p>{{ product.price }} €</p>
+                    </div>
+                {% empty %}
+                    <p>Aucun produit disponible.</p>
+                {% endfor %}
+            </div>
+        </section>
+        {% endblock %}
     </main>
 
     <footer>
-        <p>&copy; 2025 ONE | Tous droits réservés</p>
+        <!-- Section Newsletter -->
+        <div class="footer-section">
+            <h3>Restez informé</h3>
+            <p>Inscrivez-vous à notre newsletter pour recevoir les dernières mises à jour directement dans votre boîte de réception.</p>
+            <form action="#" method="post" class="newsletter-form">
+                <input type="email" name="email" placeholder="Votre adresse e-mail" required>
+                <button type="submit">S'inscrire</button>
+            </form>
+        </div>
+
+        <!-- Réseaux sociaux -->
+        <div class="social-media">
+            <a href="#"><i class="bi bi-twitter-x"></i></a>
+            <a href="#"><i class="bi bi-instagram"></i></a>
+        </div>
+
+        <!-- Copyright -->
+        <div class="footer-bottom">
+            &copy; 2025 One Boutique — Tous droits réservés.
+        </div>
     </footer>
 </body>
 </html>
