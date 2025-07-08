@@ -30,17 +30,11 @@
 
         <nav>
             <ul class="navbar">
-                <li class="dropdown">
-                    <a href="#">Homme</a>
-                    <ul class="dropdown-content">
-                        <li><a href="{% url 'Homme' %}?category=chaussures">Chaussures</a></li>
-                    </ul>
+                <li>
+                    <a href="{% url 'Homme' %}">Homme</a>
                 </li>
-                <li class="dropdown">
-                    <a href="#">Femme</a>
-                    <ul class="dropdown-content">
-                        <li><a href="{% url 'Femme' %}?category=robes">Robes</a></li>
-                    </ul>
+                <li>
+                    <a href="{% url 'Femme' %}">Femme</a>
                 </li>
                 <li><a href="{% url 'Accessoires' %}">Accessoires</a></li>
             </ul>
